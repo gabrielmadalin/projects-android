@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="home_list">
+        <item>Verhaltensendokrinologie</item>
+        <item>Neurophysiologe</item>
+        <item>Bildgebende Verfahren</item>
+        <item>Begriffserläuterungen</item>
+        <item>Autor</item>
+        <item>Projekte</item>
+        <item>Erklärung</item>
+        <item>Sonstiges</item>
+    </string-array>
+    <string-array name="sub_list_01">
+    	<item>Serotonin (Glück!)</item>
+		<item>Dopamin (Gier!)</item>
+		<item>Oxytozin (Vertrauen!)</item>
+    </string-array>
+</resources>
