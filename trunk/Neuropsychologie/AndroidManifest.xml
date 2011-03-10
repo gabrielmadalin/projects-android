@@ -20,6 +20,9 @@
         	android:name=".SubList"
         	android:screenOrientation="portrait">
         </activity>
+        <activity
+        	android:name=".TextViewActivity">
+        </activity>
 
     </application>
 </manifest>

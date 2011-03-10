@@ -11,8 +11,102 @@
         <item>Sonstiges</item>
     </string-array>
     <string-array name="sub_list_01">
-    	<item>Serotonin (Glück!)</item>
-		<item>Dopamin (Gier!)</item>
-		<item>Oxytozin (Vertrauen!)</item>
+    	<item>01 Serotonin (Glück!)</item>
+		<item>02 Dopamin (Gier!)</item>
+		<item>03 Oxytozin (Vertrauen!)</item>
+		<item>04 Vasopressin (Fürsorge!)</item>
+		<item>05 Endorphine (Euphorie!)</item>
+		<item>06 Phenylethylamin (Verliebtsein!)</item>
+		<item>07 Neurotrophin (Liebe!)</item>
+		<item>08 Adrenalin (Kampfeslust!)</item>
+		<item>09 Noradrenalin (Streitlust!)</item>
+		<item>10 Kortisol (Erschöpfung!)</item>
+		<item>11 Kortikosteron (Feindseligkeit!)</item>
+		<item>12 Testosteron (Männlichkeit!)</item>
+		<item>13 Östrogen (Weiblichkeit!)</item>
+		<item>14 Östradiol (Erotik!)</item>
+		<item>15 Progesteron (Ausgeglichenheit!)</item>
+		<item>16 Prolaktin (Beschützerinstinkt!)</item>
+		<item>17 Melatonin (Müdigkeit!)</item>
+		<item>18 Insulin (Hunger!)</item>
+		<item>19 Glukagon (Energie!)</item>
+		<item>20 Leptin (Sättigung!)</item>
+		<item>21 Ghrelin (Appetit!)</item>
+		<item>22 Somatrophin (Wachstum!)</item>
+		<item>23 Glutamat (Verwirrung!)</item>
+		<item>24 Azetylcholin (Wachsamkeit!)</item>
+		<item>25 Anti-Müller-Hormon (Fruchtbarkeit!)</item>
+	</string-array>
+    <string-array name="sub_list_02">
+    	<item>01 Kleinhirn</item>
+		<item>02 Mittelhirn</item>
+		<item>03 Zwischenhirn</item>
+		<item>04 Grosshirn</item>
+		<item>05 Limbisches System (Der innere Schweinehund)</item>
+		<item>06 Mesolimbische Bahn (Das Belohnungszentrum)</item>
+		<item>07 Blut-Hirn-Schranke (Der Grenzwächter)</item>
+		<item>08 Zentralnervensystem (Der Autopilot)</item>
+    </string-array>
+    <string-array name="sub_list_02_02">
+	    <item>01 Subtantia Nigra (Die Euphoriebremse)</item>
+		<item>02 Zentrales Höhlengrau (Der Schmerzkiller)</item>
+		<item>03 Ventrales Tegmentum (Das Euphoriegaspedal)</item>
+    </string-array>
+    <string-array name="sub_list_02_03">
+	    <item>01 Hypothalamus (Der Homöostatiker)</item>
+		<item>02 Hypophyse (Der Speicher)</item>
+		<item>03 Thalamus (Die Sinneszentrale)</item>
+		<item>04 Zirbeldrüse (Das Sandmännchen)</item>
+    </string-array>
+    <string-array name="sub_list_02_04">
+	    <item>01 Basalganglien (Die gute Erziehung)</item>
+		<item>02 Schläfenlappen (Der Esoteriker)</item>
+		<item>03 Corpus Callosum (Der Dolmetscher)</item>
+		<item>04 Kortex (Der Homo sapiens)</item>
+		<item>05 Auditiver, olfaktorischer, somatosensorischer und visueller Kortex (Die Benutzeroberfläche)</item>
+    </string-array>
+    <string-array name="sub_list_02_04_01">
+    	<item>01 Pallidum (Die Impulskontrolle)</item>
+		<item>02 Corpus Striatum (Der Antreiber)</item>
+    </string-array>
+    <string-array name="sub_list_02_04_01_02">
+    	<item>01 Nucleus Caudatus (Der Zappelphillip)</item>
+		<item>02 Putamen (Der Feinmotoriker)</item>
+		<item>03 Nucleus Accumbens (Die Glückszentrale)</item>
+    </string-array>
+    <string-array name="sub_list_02_04_02">
+    	<item>01 Amygdala (Der Furchteinflösser)</item>
+		<item>02 Hippocampus (Das Gedächtnis)</item>
+    </string-array>    
+    <string-array name="sub_list_02_04_04">
+    	<item>01 Neokortex (Der Stratege)</item>
+		<item>02 Insula (Der Brechreizkitzler)</item>
+    </string-array>
+    <string-array name="sub_list_02_04_04_01">
+    	<item>01 Präfrontaler Kortex (Der Moralist)</item>
+		<item>02 Motorkortex (Der Marionettenspieler)
+	   	</item>
+    </string-array>
+    <string-array name="sub_list_02_04_04_01_01">
+    	<item>01 Orbifrontaler Kortex (Die Ichzentrale)</item>
+		<item>02 Cingulärer Kortex (Der Problemlöser)</item>
+		<item>03 Spiegelneurone (Das Einfühlungsvermögen)</item>
+    </string-array>
+    <string-array name="sub_list_02_04_04_01_02">
+    	<item>01 Broca-Areal und Wernicke-Areal (Der Kommunikator)</item>
+    </string-array>    
+    <string-array name="sub_list_03">
+		<item>01 Magnetresonanztomografie (MR, MRT oder MRI)</item>
+		<item>02 Funktionelle Magnetresonanztomografie (fMRT oder fMRI)</item>
+		<item>03 Positronen-Emissions-Tomografie (PET)</item>
+		<item>04 Computertomografie</item>
+		<item>05 Elektroenzephalographie (EEG)</item>
+		<item>06 Magnetenzephalografie (MEG)</item>
+    </string-array>
+    <string-array name="sub_list_04">
+	    <item>01 Wörterbuch</item>
+		<item>02 Botenstoffe</item>
+		<item>03 Moleküle</item>
+		<item>04 Neuronen (Nervenzellen)</item>
     </string-array>
 </resources>

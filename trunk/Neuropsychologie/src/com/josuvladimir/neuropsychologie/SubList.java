@@ -1,6 +1,7 @@
 package com.josuvladimir.neuropsychologie;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,5 +22,8 @@ public class SubList extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+		Intent intent = new Intent();
+		intent.setClass(this, TextViewActivity.class);
+		startActivity(intent);
 	}
 }
