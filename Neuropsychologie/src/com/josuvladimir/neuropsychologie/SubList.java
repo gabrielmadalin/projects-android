@@ -22,8 +22,15 @@ public class SubList extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+		showSubList(0);
+		showTextView(0);
+	}
+	private void showSubList(int id) {
 		Intent intent = new Intent();
 		intent.setClass(this, TextViewActivity.class);
-		startActivity(intent);
+		startActivity(intent);		
+	}
+	private void showTextView(int id) {
+		
 	}
 }
