@@ -14,7 +14,7 @@ public class SubList extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sublist);
-		strings = getResources().getStringArray(R.array.sub_list_01);
+		strings = getResources().getStringArray(R.array.data_1_01);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,strings);
 		setListAdapter(adapter);
