@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
         <activity
+        	android:name=".List"
+        	android:screenOrientation="portrait">
+        </activity>
+        <activity
         	android:name=".SubList"
         	android:screenOrientation="portrait">
         </activity>
