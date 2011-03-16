@@ -1,6 +1,7 @@
 package com.josuvladimir.neuropsychologie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 public class SubList extends ListActivity {
 
-	private ArrayList<String> mStrings;
+	private List<String> mStrings;
 	private ListAdapter	mAdapter;
 	private TextView	mTextView;
 	@Override
@@ -24,13 +25,8 @@ public class SubList extends ListActivity {
 		mTextView.setText(bundle.getString(Application.SUBLIST));
 		int id = bundle.getInt(Application.LIST_ID);
 		getData(id);
-		String []strings = new String[mStrings.size()];
-		mStrings.toArray(strings);
-//		mStrings = getResources().getStringArray(R.array.data_1_01);
-		mAdapter = new ListAdapter(this, strings);
+		mAdapter = new ListAdapter(this, mStrings);
 		setListAdapter(mAdapter);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mStrings);
-//		setListAdapter(adapter);
 	}
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {

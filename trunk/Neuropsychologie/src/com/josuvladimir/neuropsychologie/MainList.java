@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class List extends ListActivity {
+public class MainList extends ListActivity {
 	private String[] mStrings;
 	private ListAdapter mAdapter;
 
@@ -16,7 +16,6 @@ public class List extends ListActivity {
 		setContentView(R.layout.list);
 		mStrings = getResources().getStringArray(R.array.home_list);
 		mAdapter = new ListAdapter(this, mStrings);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
 		setListAdapter(mAdapter);
 		getListView().setTextFilterEnabled(true);
 	}
@@ -24,7 +23,7 @@ public class List extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(this, SubList.class);
-		intent.putExtra(Application.LIST_ID, position);
+		intent.putExtra(Application.LIST_ID, position + 1);
 		intent.putExtra(Application.SUBLIST, mStrings[position]);
 		startActivity(intent);
 	}

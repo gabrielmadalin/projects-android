@@ -26,7 +26,7 @@ public class Home extends Activity implements OnClickListener{
 		}
 	}
 	public void loadList(){
-		Intent intent = new Intent(this, List.class);
+		Intent intent = new Intent(this, MainList.class);
 		startActivity(intent);		
 	}
 }
