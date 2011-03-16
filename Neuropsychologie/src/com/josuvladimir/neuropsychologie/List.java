@@ -4,19 +4,20 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class List extends ListActivity {
 	private String[] mStrings;
+	private ListAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
 		mStrings = getResources().getStringArray(R.array.home_list);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
-		setListAdapter(adapter);
+		mAdapter = new ListAdapter(this, mStrings);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
+		setListAdapter(mAdapter);
 		getListView().setTextFilterEnabled(true);
 	}
 	@Override
