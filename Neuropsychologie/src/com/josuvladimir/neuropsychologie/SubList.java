@@ -15,6 +15,7 @@ public class SubList extends ListActivity {
 	private List<String> mStrings;
 	private ListAdapter	mAdapter;
 	private TextView	mTextView;
+	private int			mListID;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,24 +24,23 @@ public class SubList extends ListActivity {
 		mStrings = new ArrayList<String>();
 		Bundle bundle = getIntent().getExtras();
 		mTextView.setText(bundle.getString(Application.SUBLIST));
-		int id = bundle.getInt(Application.LIST_ID);
-		getData(id);
+		mListID = bundle.getInt(Application.LIST_ID);
+		getData(mListID);
 		mAdapter = new ListAdapter(this, mStrings);
 		setListAdapter(mAdapter);
 	}
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		showSubList(0);
-		showTextView(0);
+		showText(position + 1);
 	}
-	private void showSubList(int id) {
+	private void showText(int id) {
 		Intent intent = new Intent();
 		intent.setClass(this, TextViewActivity.class);
+		intent.putExtra(Application.LIST_ID, mListID);
+		intent.putExtra(Application.SUBLIST_ID, id);
+		intent.putExtra(Application.SUBLIST, mStrings.get(id));
 		startActivity(intent);		
-	}
-	private void showTextView(int id) {
-		
 	}
 	public void getData(int id) {
 		String string = "R.array.data_" + id + "_";
