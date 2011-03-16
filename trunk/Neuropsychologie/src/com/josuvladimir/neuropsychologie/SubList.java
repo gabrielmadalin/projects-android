@@ -6,14 +6,13 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class SubList extends ListActivity {
 
-//	private String[] mStrings;
 	private ArrayList<String> mStrings;
+	private ListAdapter	mAdapter;
 	private TextView	mTextView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +23,14 @@ public class SubList extends ListActivity {
 		Bundle bundle = getIntent().getExtras();
 		mTextView.setText(bundle.getString(Application.SUBLIST));
 		int id = bundle.getInt(Application.LIST_ID);
-		
 		getData(id);
+		String []strings = new String[mStrings.size()];
+		mStrings.toArray(strings);
 //		mStrings = getResources().getStringArray(R.array.data_1_01);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mStrings);
-		setListAdapter(adapter);
+		mAdapter = new ListAdapter(this, strings);
+		setListAdapter(mAdapter);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mStrings);
+//		setListAdapter(adapter);
 	}
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
