@@ -9,6 +9,7 @@ import android.util.Log;
 public class Application extends android.app.Application {
 	
 	public static final String LIST_ID	= "list_id";
+	public static final String SUBLIST_ID	= "sublist_id";
 	public static final String SUBLIST	= "sublist";	
 	public static final String TAG = "Neyropsyhologie";
 	
