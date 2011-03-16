@@ -32,13 +32,13 @@ public class SubList extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		showText(position + 1);
+		showText(position);
 	}
 	private void showText(int id) {
 		Intent intent = new Intent();
 		intent.setClass(this, TextViewActivity.class);
 		intent.putExtra(Application.LIST_ID, mListID);
-		intent.putExtra(Application.SUBLIST_ID, id);
+		intent.putExtra(Application.SUBLIST_ID, id + 1);
 		intent.putExtra(Application.SUBLIST, mStrings.get(id));
 		startActivity(intent);		
 	}

@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical"
-	android:background="@drawable/background_red">
-	<LinearLayout
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="70dp"
+		android:gravity="center" 
+		android:textSize="25sp"
+		android:id="@+id/text_title"
+		android:background="@drawable/header" >
+	</TextView>
+	<ScrollView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
-		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="70dp"
-			android:layout_weight="1"
-			android:gravity="center" 
-			android:textSize="25sp"
-			android:id="@+id/text_title"
-			android:background="@drawable/header" >
-		</TextView>
+		android:background="@drawable/background_red">
 		<TextView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:layout_weight="1"
 			android:textSize="20sp"
 			android:padding="5dp"
-			android:text="@string/text_01_01"
-			android:id="@+id/text_view"
->
+			android:id="@+id/text_view">
 		</TextView>
-	</LinearLayout>
-</ScrollView>
+	</ScrollView>
+</LinearLayout>
