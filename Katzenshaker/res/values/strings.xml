@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Katzenshaker</string>
     <string name="play">Play</string>
+    <string name="share">Share</string>
 </resources>
