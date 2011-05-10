@@ -1,0 +1,3 @@
+Acesta este un exemplu de text în limba română. Vă place cum sună? Puteţi înlocui acest text cu orice altceva.
+Spre deosebire de alte demonstraţii interactive, aceasta nu are limitare la 200 de caractere. Puteţi converti poveşti pentru copii, de exemplu.
+Pentru comentarii folosiţi link-ul din partea de jos a paginii.
