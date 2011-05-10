@@ -14,24 +14,27 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-import com.josuvladimir.util.MyRoAnalyzer;
+import com.josuvladimir.util.Util;
 
 public class Main {
 
-	private static final String FILE_PATH = "../res/input.txt";
+	private static final String FILE_PATH = "D:/Documents/WORK/Projects/RegasireaInformatiei/res/input.txt";
+
+	public static void main(String[] args) {
+		Init();
+	}
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	private static void Init() {
 		File file = new File(FILE_PATH);
 		FileInputStream inputStream;
-		System.out.print("Test");
+		Util.log("test");
 		try {
 			inputStream = new FileInputStream(file);
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-//		process();
 	}
 
 	@SuppressWarnings({ "unused", "deprecation" })
@@ -39,7 +42,7 @@ public class Main {
 		try {
 			Directory directory = FSDirectory.open(new File(FILE_PATH));
 			IndexSearcher searcher = new IndexSearcher(directory);
-			QueryParser parser = new QueryParser(Version.LUCENE_29, "contents", new MyRoAnalyzer(Version.LUCENE_29));
+			QueryParser parser = new QueryParser(Version.LUCENE_29, "contents", new RoAnalyzer(Version.LUCENE_29));
 			
 		} catch (CorruptIndexException e) {
 			// TODO Auto-generated catch block
