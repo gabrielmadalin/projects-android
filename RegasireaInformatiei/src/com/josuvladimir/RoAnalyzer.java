@@ -1,4 +1,4 @@
-package com.josuvladimir.util;
+package com.josuvladimir;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,18 +13,20 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
 
-public class MyRoAnalyzer extends Analyzer
+import com.josuvladimir.util.MyRoFilter;
+
+public class RoAnalyzer extends Analyzer
 {
 	private final Version version;
 	private Set<?> stopWords;
 	
 	/** Builds the named analyzer with no stop words. */
-	public MyRoAnalyzer(Version version) 
+	public RoAnalyzer(Version version) 
 	{
 	    this.version = version;
 	  }
 	/** Builds the named analyzer with the given stop words. */
-	public MyRoAnalyzer(Version version, String[] stopwords) 
+	public RoAnalyzer(Version version, String[] stopwords) 
 	{
 	    this(version);
 	    stopWords = StopFilter.makeStopSet(stopwords);
