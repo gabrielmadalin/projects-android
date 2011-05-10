@@ -18,20 +18,20 @@ import com.josuvladimir.util.MyRoAnalyzer;
 
 public class Main {
 
-	private static final String FILE_PATH = "/res/input.txt";
+	private static final String FILE_PATH = "../res/input.txt";
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		File file = new File(FILE_PATH);
 		FileInputStream inputStream;
+		System.out.print("Test");
 		try {
 			inputStream = new FileInputStream(file);
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-			String string;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		process();
+//		process();
 	}
 
 	@SuppressWarnings({ "unused", "deprecation" })
