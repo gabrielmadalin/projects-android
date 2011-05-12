@@ -13,7 +13,6 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
 
-import com.josuvladimir.util.MyRoFilter;
 
 public class RoAnalyzer extends Analyzer
 {
