@@ -25,6 +25,10 @@ public class Main {
 	public static final String INDEX_PATH 			= ROOT_PATH + "/index/";
 	public static final String OUTPUT_PATH 			= ROOT_PATH + "/output/";
 	public static final String STOP_WORDS_PATH 		= ROOT_PATH + "/res/stop_words.txt";
+	public static final String CONTENTS 			= "contents";
+	public static final String FILENAME 			= "filename";
+	public static final String FULLPATH 			= "fullpath";
+	public static final String TITLE 				= "title";
 	private static String mSearchString;
 //	private static File mOutputFile;
 //	private static FileWriter mWriter;
@@ -50,7 +54,7 @@ public class Main {
 		indexer.index(INPUT_DOCS_PATH, null);
 		IndexReader reader = indexer.mWriter.getReader();
 		indexer.close();
-		mSearchString = "eu";
+		mSearchString = "pas";
 	}
 
 	private static void init() throws IOException {
@@ -65,13 +69,13 @@ public class Main {
 	private static void search() throws IOException, ParseException {
 		Directory directory = FSDirectory.open(new File(INDEX_PATH));
 		IndexSearcher searcher = new IndexSearcher(directory);
-		QueryParser parser = new QueryParser(Version.LUCENE_29, "contents", new RoAnalyzer(Version.LUCENE_29));
+		QueryParser parser = new QueryParser(Version.LUCENE_29, CONTENTS, new RoAnalyzer(Version.LUCENE_29));
 		Query query = parser.parse(mSearchString);
 		Hits hits = searcher.search(query);
 		if (hits.length() > 0) {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
-				Util.log(document.get("title"));
+				Util.log("Found in: " + document.get(FULLPATH) + " " + document.get(CONTENTS));
 			}
 		}
 	}
