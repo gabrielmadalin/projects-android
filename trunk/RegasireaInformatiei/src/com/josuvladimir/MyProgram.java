@@ -1,6 +1,7 @@
-package com.josuvladimir.util;
+package com.josuvladimir;
 
 import java.lang.reflect.InvocationTargetException;
+
 
 
 public abstract class MyProgram {

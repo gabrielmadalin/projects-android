@@ -1,4 +1,5 @@
-package com.josuvladimir.util;
+package com.josuvladimir;
+
 
 
 public class MyRoStemmer extends MyProgram{

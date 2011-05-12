@@ -1,4 +1,4 @@
-package com.josuvladimir.util;
+package com.josuvladimir;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
