@@ -99,7 +99,7 @@ public class Indexer {
 		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   	//9
     		Field.Store.YES, Field.Index.NOT_ANALYZED));			//9
 //		String content = Util.getContent(f.getAbsolutePath());
-//		doc.add(new Field(Main.CONTENT, content, Field.Store.YES, Field.Index.NOT_ANALYZED));
+//		doc.add(new Field(Main.CONTENT, content, Field.Store.NO, Field.Index.ANALYZED));
 		return doc;
 	}
 	private void indexFile(File f) throws Exception {
