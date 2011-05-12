@@ -2,6 +2,7 @@ package com.josuvladimir;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -24,7 +25,7 @@ public class Main {
 	public static final String INDEX_PATH 			= ROOT_PATH + "/index/";
 	public static final String OUTPUT_PATH 			= ROOT_PATH + "/output/";
 	public static final String STOP_WORDS_PATH 		= ROOT_PATH + "/res/stop_words.txt";
-	public static final String CONTENTS 			= "contents";
+	public static final String CONTENT 				= "contents";
 	public static final String FILENAME 			= "filename";
 	public static final String FULLPATH 			= "fullpath";
 	public static final String TITLE 				= "title";
@@ -35,8 +36,8 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			init();
-			long time = System.currentTimeMillis();
 			index();
+			long time = System.currentTimeMillis();
 			Util.log("Index in " + String.valueOf(System.currentTimeMillis() - time) + " milis");
 			search();
 		} catch (IOException e) {
@@ -57,6 +58,10 @@ public class Main {
 	}
 
 	private static void init() throws IOException {
+		Scanner scanner = new Scanner(System.in);
+		Util.log("Search for: ");
+		mSearchString = scanner.nextLine();
+		scanner.close();
 //		File file = new File(INPUT_FILE_PATH);
 //		FileInputStream inputStream;
 //		inputStream = new FileInputStream(file);
@@ -68,13 +73,14 @@ public class Main {
 	private static void search() throws IOException, ParseException {
 		Directory directory = FSDirectory.open(new File(INDEX_PATH));
 		IndexSearcher searcher = new IndexSearcher(directory);
-		QueryParser parser = new QueryParser(Version.LUCENE_29, CONTENTS, new RoAnalyzer(Version.LUCENE_29));
+		QueryParser parser = new QueryParser(Version.LUCENE_29, CONTENT, new RoAnalyzer(Version.LUCENE_29));
 		Query query = parser.parse(mSearchString);
 		Hits hits = searcher.search(query);
+		Util.log("Results: " + hits.length());
 		if (hits.length() > 0) {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
-				Util.log("Found in: " + document.get(FULLPATH) + " " + document.get(CONTENTS));
+				Util.log("Found in: " + document.get(FULLPATH) + " " + document.get(CONTENT));
 			}
 		}
 	}

@@ -92,13 +92,14 @@ public class Indexer {
 	}
 	protected Document getDocument(File f) throws Exception {
 		Document doc = new Document();
-		doc.add(new Field(Main.CONTENTS, new FileReader(f)));
+		FileReader fileReader = new FileReader(f);
+		doc.add(new Field(Main.CONTENT, fileReader));
 		doc.add(new Field(Main.TITLE, f.getName(),       			//8
 				Field.Store.YES, Field.Index.NOT_ANALYZED));		//8
 		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   	//9
     		Field.Store.YES, Field.Index.NOT_ANALYZED));			//9
 //		String content = Util.getContent(f.getAbsolutePath());
-//		doc.add(new Field(Main.CONTENTS, content, Field.Store.YES, Field.Index.NOT_ANALYZED));
+//		doc.add(new Field(Main.CONTENT, content, Field.Store.YES, Field.Index.NOT_ANALYZED));
 		return doc;
 	}
 	private void indexFile(File f) throws Exception {
