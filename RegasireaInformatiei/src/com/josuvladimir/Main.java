@@ -1,30 +1,31 @@
 package com.josuvladimir;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 import com.josuvladimir.util.Util;
 
+@SuppressWarnings("deprecation")
 public class Main {
 
 	public static final String INPUT_FILE_PATH		= "D:/Documents/WORK/Projects/RegasireaInformatiei/res/input.txt";
 	public static final String INPUT_DOCS_PATH		= "D:/Documents/WORK/Projects/RegasireaInformatiei/res/docs";
 	public static final String INDEX_PATH 			= "D:/Documents/WORK/Projects/RegasireaInformatiei/index/";
 	public static final String OUTPUT_PATH 			= "D:/Documents/WORK/Projects/RegasireaInformatiei/output/";
-	private static File mOutputFile;
-	@SuppressWarnings("unused")
-	private static FileWriter mWriter;
+	private static String mSearchString;
+//	private static File mOutputFile;
+//	private static FileWriter mWriter;
 
 	public static void main(String[] args) {
 		try {
@@ -46,24 +47,30 @@ public class Main {
 		Indexer indexer = new Indexer(INDEX_PATH);
 		indexer.index(INPUT_DOCS_PATH, null);
 		IndexReader reader = indexer.mWriter.getReader();
-		
 		indexer.close();
+		mSearchString = "eu";
 	}
 
-	@SuppressWarnings("unused")
 	private static void init() throws IOException {
-		File file = new File(INPUT_FILE_PATH);
-		FileInputStream inputStream;
-		inputStream = new FileInputStream(file);
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-		mOutputFile = new File(OUTPUT_PATH + "output.txt");
-		mWriter = new FileWriter(mOutputFile);
+//		File file = new File(INPUT_FILE_PATH);
+//		FileInputStream inputStream;
+//		inputStream = new FileInputStream(file);
+//		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//		mOutputFile = new File(OUTPUT_PATH + "output.txt");
+//		mWriter = new FileWriter(mOutputFile);
 	}
 
-	@SuppressWarnings({ "unused", "deprecation" })
-	private static void search() throws IOException {
-		Directory directory = FSDirectory.open(new File(INPUT_DOCS_PATH));
+	private static void search() throws IOException, ParseException {
+		Directory directory = FSDirectory.open(new File(INDEX_PATH));
 		IndexSearcher searcher = new IndexSearcher(directory);
 		QueryParser parser = new QueryParser(Version.LUCENE_29, "contents", new RoAnalyzer(Version.LUCENE_29));
+		Query query = parser.parse(mSearchString);
+		Hits hits = searcher.search(query);
+		if (hits.length() > 0) {
+			for (int i = 0; i < hits.length(); i++) {
+				Document document = hits.doc(i);
+				Util.log(document.get("title"));
+			}
+		}
 	}
 }
