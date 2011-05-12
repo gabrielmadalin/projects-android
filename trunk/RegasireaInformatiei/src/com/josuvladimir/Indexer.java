@@ -21,7 +21,6 @@ import org.apache.lucene.util.Version;
 
 public class Indexer {
 	
-	private static final String STOP_WORDS_PATH = "D:/Documents/WORK/Projects/RegasireaInformatiei/res/stop_words.txt";
 
 	public IndexWriter mWriter;
 
@@ -30,7 +29,7 @@ public class Indexer {
 	  ArrayList<String> arrayList = new ArrayList<String>();
 	  String[] strings = null;
 	  try{
-			File f = new File(STOP_WORDS_PATH);
+			File f = new File(Main.STOP_WORDS_PATH);
 		    FileInputStream fstream = new FileInputStream(f);
 		    DataInputStream in = new DataInputStream(fstream);
 		    BufferedReader br = new BufferedReader(new InputStreamReader(in));
