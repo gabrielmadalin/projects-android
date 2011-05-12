@@ -80,7 +80,7 @@ public class Main {
 		if (hits.length() > 0) {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
-				Util.log("Found in: " + document.get(FULLPATH) + " " + document.get(CONTENT));
+				Util.log("Found in: " + document.get(FULLPATH));
 			}
 		}
 	}
