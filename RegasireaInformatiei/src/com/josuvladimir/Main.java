@@ -19,10 +19,12 @@ import com.josuvladimir.util.Util;
 @SuppressWarnings("deprecation")
 public class Main {
 
-	public static final String INPUT_FILE_PATH		= "D:/Documents/WORK/Projects/RegasireaInformatiei/res/input.txt";
-	public static final String INPUT_DOCS_PATH		= "D:/Documents/WORK/Projects/RegasireaInformatiei/res/docs";
-	public static final String INDEX_PATH 			= "D:/Documents/WORK/Projects/RegasireaInformatiei/index/";
-	public static final String OUTPUT_PATH 			= "D:/Documents/WORK/Projects/RegasireaInformatiei/output/";
+	public static final String ROOT_PATH 			= System.getProperty("user.dir");
+	public static final String INPUT_FILE_PATH		= ROOT_PATH + "/res/input.txt";
+	public static final String INPUT_DOCS_PATH		= ROOT_PATH + "/res/docs";
+	public static final String INDEX_PATH 			= ROOT_PATH + "/index/";
+	public static final String OUTPUT_PATH 			= ROOT_PATH + "/output/";
+	public static final String STOP_WORDS_PATH 		= ROOT_PATH + "/res/stop_words.txt";
 	private static String mSearchString;
 //	private static File mOutputFile;
 //	private static FileWriter mWriter;
