@@ -38,7 +38,7 @@ public class RoAnalyzer extends Analyzer
 	    if (stopWords != null)
 	    	result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(version),
 	                              result, stopWords);
-	    result = new MyRoFilter(result);
+	    result = new RoFilter(result);
 	    return result;
 	}
 
@@ -70,7 +70,7 @@ public class RoAnalyzer extends Analyzer
 	    	if (stopWords != null)
 	    		streams.result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(version),
 	                                        streams.result, stopWords);
-	    	streams.result = new MyRoFilter(streams.result);
+	    	streams.result = new RoFilter(streams.result);
 	    	setPreviousTokenStream(streams);
 	    } else {
 	    	streams.source.reset(reader);
