@@ -2,7 +2,7 @@ package com.josuvladimir;
 
 
 
-public class MyRoStemmer extends MyProgram{
+public class RoStemmer extends MyProgram{
 	private Among a_0[] = {
             new Among ( "", -1, 3, "", this),
             new Among ( "I", 0, 1, "", this),
@@ -254,7 +254,7 @@ public class MyRoStemmer extends MyProgram{
         private int I_p1;
         private int I_pV;
 
-//        private void copy_from(MyRoStemmer other) {
+//        private void copy_from(RoStemmer other) {
 //            B_standard_suffix_removed = other.B_standard_suffix_removed;
 //            I_p2 = other.I_p2;
 //            I_p1 = other.I_p1;

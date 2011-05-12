@@ -7,23 +7,23 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 
 
-public final class MyRoFilter extends TokenFilter{
+public final class RoFilter extends TokenFilter{
 	  
 	private MyProgram stemmer;
 	private TermAttribute termAtt;
-	public MyRoFilter(TokenStream input, MyProgram stemmer) 
+	public RoFilter(TokenStream input, MyProgram stemmer) 
 	{
 	    super(input);
 	    this.stemmer = stemmer;
 	    termAtt = (TermAttribute) addAttribute(TermAttribute.class);
 	 }
 	
-	 public MyRoFilter(TokenStream input) 
+	 public RoFilter(TokenStream input) 
 	 {
 	    super(input);
 	    try 
 	    {      
-	      MyRoStemmer stemClass = new MyRoStemmer();
+	      RoStemmer stemClass = new RoStemmer();
 	      stemmer = (MyProgram) stemClass;
 	    } 
 	    catch (Exception e) 
