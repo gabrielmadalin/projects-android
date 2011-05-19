@@ -42,6 +42,22 @@ public class Util {
 	public static String replaceDiacritics(String contentString) {
 		//*/
 		contentString = contentString
+		.replace("Ä‚", "A")
+		.replace("Ä�", "a")
+		.replace("Ă‚", "A")
+		.replace("Ă˘", "a")
+		.replace("ĂŽ", "A")
+		.replace("Ă®", "a")
+		.replace("Čš", "I")
+		.replace("Č›", "i")
+		.replace("Č�", "T")
+		.replace("Č™", "t")
+		.replace("»ö", "T")
+		.replace("»õ", "t")
+		.replace("≈û", "S")
+		.replace("»ò", "S")
+		.replace("≈ü", "s")
+		////////////////
 		.replace("ƒÇ", "A")
 		.replace("ƒÉ", "a")
 		.replace("√Ç", "A")
