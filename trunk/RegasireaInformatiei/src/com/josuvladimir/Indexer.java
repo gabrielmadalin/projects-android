@@ -74,6 +74,7 @@ public class Indexer {
 	public int index(String dataDir, FileFilter filter) throws Exception {
 		File[] files = new File(dataDir).listFiles();
 		for (File f: files) {
+			
 			if (!f.isDirectory() &&
 					!f.isHidden() &&
 					f.exists() &&
@@ -94,11 +95,15 @@ public class Indexer {
 		Document doc = new Document();
 		FileReader fileReader = new FileReader(f);
 		doc.add(new Field(Main.CONTENT, fileReader));
-		doc.add(new Field(Main.TITLE, f.getName(),       			//8
-				Field.Store.YES, Field.Index.NOT_ANALYZED));		//8
-		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   	//9
-    		Field.Store.YES, Field.Index.NOT_ANALYZED));			//9
+		doc.add(new Field(Main.TITLE, f.getName(),       				//8
+				Field.Store.YES, Field.Index.NOT_ANALYZED));			//8
+		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   		//9
+    		Field.Store.YES, Field.Index.NOT_ANALYZED));				//9
+		doc.add(new Field(Main.FIRST_LINE, Util.getFirstLine(f.getAbsolutePath()),
+				Field.Store.YES, Field.Index.NOT_ANALYZED));
 //		String content = Util.getContent(f.getAbsolutePath());
+//		String content = Util.getFirstLine(f.getAbsolutePath());
+//		Util.log(content);
 //		doc.add(new Field(Main.CONTENT, content, Field.Store.NO, Field.Index.ANALYZED));
 		return doc;
 	}
