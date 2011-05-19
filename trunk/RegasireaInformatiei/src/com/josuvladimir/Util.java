@@ -56,7 +56,7 @@ public class Util {
 		.replace("»õ", "t")
 		.replace("≈û", "S")
 		.replace("»ò", "S")
-		.replace("≈ü", "s")
+		.replace("≈ü", "mSearchString")
 		////////////////
 		.replace("ƒÇ", "A")
 		.replace("ƒÉ", "a")
@@ -70,12 +70,12 @@ public class Util {
 		.replace("»õ", "t")
 		.replace("≈û", "S")
 		.replace("»ò", "S")
-		.replace("≈ü", "s");
+		.replace("≈ü", "mSearchString");
 		/*/
 		contentString.replace("&#226;", "a");
 		contentString.replace("&#238;", "i");
 		contentString.replace("&#259;", "a");
-		contentString.replace("&#350;", "s");
+		contentString.replace("&#350;", "mSearchString");
 		contentString.replace("&#355;", "t");
 		//*/
 		/*
@@ -86,10 +86,10 @@ public class Util {
 		 "&#258;" => "A", //"A",
 		 "&#259;" => "a", //"a",
 		 "&#350;" => "S", //"S",
-		 "&#351;" => "s", //"s",
+		 "&#351;" => "mSearchString", //"mSearchString",
 		 "&#354;" => "T", //"T",
 		 "&#355;" => "t", //"t",
-		 "�" => "I", "�" => "i", "�" => "a", "�" => "A", "�" => "s", "a" => "a"
+		 "�" => "I", "�" => "i", "�" => "a", "�" => "A", "�" => "mSearchString", "a" => "a"
 		 */		
 		return contentString;
 	}

@@ -34,8 +34,6 @@ public class Main {
     public static String Language = "Romanian";
 	private static String mSearchString;
 	private static Scanner mScanner;
-//	private static File mOutputFile;
-//	private static FileWriter mWriter;
 
 	public static void main(String[] args) {
 		try {
@@ -68,19 +66,13 @@ public class Main {
 		indexer.close();
 		mSearchString = "pas";
 	}
-//popescunmarius@gmail.com
+
 	private static String getSearchString() throws IOException {
 		Util.log("Search for: ");
 		if (mScanner.hasNextLine()) {
 			mSearchString = mScanner.nextLine();
 		}
 		return mSearchString;
-//		File file = new File(INPUT_FILE_PATH);
-//		FileInputStream inputStream;
-//		inputStream = new FileInputStream(file);
-//		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-//		mOutputFile = new File(OUTPUT_PATH + "output.txt");
-//		mWriter = new FileWriter(mOutputFile);
 	}
 
 	private static void search() throws IOException, ParseException {
@@ -94,8 +86,6 @@ public class Main {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
 				Util.log("Found in: " + document.get(FULLPATH) + "\nDate: " + document.get(DATE)  + "\nScore: " + hits.score(i) + "\n " + document.get(FIRST_LINE));
-//				List fields = document.getFields();
-//				Util.log(fields.toString());
 			}
 		}
 	}

@@ -31,12 +31,6 @@ public abstract class MyProgram {
     public String getCurrent()
     {
         String result = current.toString();
-        // Make a new StringBuffer.  If we reuse the old one, and a user of
-        // the library keeps a reference to the buffer returned (for example,
-        // by converting it to a String in a way which doesn't force a copy),
-        // the buffer size will not decrease, and we will risk wasting a large
-        // amount of memory.
-        // Thanks to Wolfram Esser for spotting this problem.
         current = new StringBuilder();
         return result;
     }
@@ -200,12 +194,12 @@ public abstract class MyProgram {
 	    int common = common_i < common_j ? common_i : common_j; // smaller
 	    Among w = v[k];
 	    int i2;
-	    for (i2 = common; i2 < w.s_size; i2++) {
+	    for (i2 = common; i2 < w.mStringSize; i2++) {
 		if (c + common == l) {
 		    diff = -1;
 		    break;
 		}
-		diff = current.charAt(c + common) - w.s.charAt(i2);
+		diff = current.charAt(c + common) - w.mSearchString.charAt(i2);
 		if (diff != 0) break;
 		common++;
 	    }
@@ -217,11 +211,11 @@ public abstract class MyProgram {
 		common_i = common;
 	    }
 	    if (j - i <= 1) {
-		if (i > 0) break; // v->s has been inspected
+		if (i > 0) break; // v->mSearchString has been inspected
 		if (j == i) break; // only one item in v
 
 		// - but now we need to go round once more to get
-		// v->s inspected. This looks messy, but is actually
+		// v->mSearchString inspected. This looks messy, but is actually
 		// the optimal approach.
 
 		if (first_key_inspected) break;
@@ -230,12 +224,12 @@ public abstract class MyProgram {
 	}
 	while(true) {
 	    Among w = v[i];
-	    if (common_i >= w.s_size) {
-		cursor = c + w.s_size;
-		if (w.method == null) return w.result;
+	    if (common_i >= w.mStringSize) {
+		cursor = c + w.mStringSize;
+		if (w.mMethod == null) return w.mResult;
 		boolean res;
 		try {
-		    Object resobj = w.method.invoke(w.methodobject,
+		    Object resobj = w.mMethod.invoke(w.mOject,
 						    new Object[0]);
 		    res = resobj.toString().equals("true");
 		} catch (InvocationTargetException e) {
@@ -245,15 +239,14 @@ public abstract class MyProgram {
 		    res = false;
 		    // FIXME - debug message
 		}
-		cursor = c + w.s_size;
-		if (res) return w.result;
+		cursor = c + w.mStringSize;
+		if (res) return w.mResult;
 	    }
-	    i = w.substring_i;
+	    i = w.subStringIndex;
 	    if (i < 0) return 0;
 	}
     }
 
-    // find_among_b is for backwards processing. Same comments apply
     protected int find_among_b(Among v[], int v_size)
     {
 	int i = 0;
@@ -273,12 +266,12 @@ public abstract class MyProgram {
 	    int common = common_i < common_j ? common_i : common_j;
 	    Among w = v[k];
 	    int i2;
-	    for (i2 = w.s_size - 1 - common; i2 >= 0; i2--) {
+	    for (i2 = w.mStringSize - 1 - common; i2 >= 0; i2--) {
 		if (c - common == lb) {
 		    diff = -1;
 		    break;
 		}
-		diff = current.charAt(c - 1 - common) - w.s.charAt(i2);
+		diff = current.charAt(c - 1 - common) - w.mSearchString.charAt(i2);
 		if (diff != 0) break;
 		common++;
 	    }
@@ -298,13 +291,13 @@ public abstract class MyProgram {
 	}
 	while(true) {
 	    Among w = v[i];
-	    if (common_i >= w.s_size) {
-		cursor = c - w.s_size;
-		if (w.method == null) return w.result;
+	    if (common_i >= w.mStringSize) {
+		cursor = c - w.mStringSize;
+		if (w.mMethod == null) return w.mResult;
 
 		boolean res;
 		try {
-		    Object resobj = w.method.invoke(w.methodobject,
+		    Object resobj = w.mMethod.invoke(w.mOject,
 						    new Object[0]);
 		    res = resobj.toString().equals("true");
 		} catch (InvocationTargetException e) {
@@ -314,17 +307,13 @@ public abstract class MyProgram {
 		    res = false;
 		    // FIXME - debug message
 		}
-		cursor = c - w.s_size;
-		if (res) return w.result;
+		cursor = c - w.mStringSize;
+		if (res) return w.mResult;
 	    }
-	    i = w.substring_i;
+	    i = w.subStringIndex;
 	    if (i < 0) return 0;
 	}
     }
-
-    /* to replace chars between c_bra and c_ket in current by the
-     * chars in s.
-     */
     protected int replace_s(int c_bra, int c_ket, String s)
     {
 	int adjustment = s.length() - (c_ket - c_bra);
@@ -343,12 +332,6 @@ public abstract class MyProgram {
 	    limit > current.length())   // this line could be removed
 	{
 	    System.err.println("faulty slice operation");
-	// FIXME: report error somehow.
-	/*
-	    fprintf(stderr, "faulty slice operation:\n");
-	    debug(z, -1, 0);
-	    exit(1);
-	    */
 	}
     }
 
@@ -393,28 +376,4 @@ public abstract class MyProgram {
 	s.replace(0, s.length(), current.substring(0, limit));
 	return s;
     }
-
-/*
-extern void debug(struct SN_env * z, int number, int line_count)
-{   int i;
-    int limit = SIZE(z->p);
-    //if (number >= 0) printf("%3d (line %4d): '", number, line_count);
-    if (number >= 0) printf("%3d (line %4d): [%d]'", number, line_count,limit);
-    for (i = 0; i <= limit; i++)
-    {   if (z->lb == i) printf("{");
-        if (z->bra == i) printf("[");
-        if (z->c == i) printf("|");
-        if (z->ket == i) printf("]");
-        if (z->l == i) printf("}");
-        if (i < limit)
-        {   int ch = z->p[i];
-            if (ch == 0) ch = '#';
-            printf("%c", ch);
-        }
-    }
-    printf("'\n");
-}
-*/
-
-
 };
