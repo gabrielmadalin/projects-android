@@ -64,7 +64,6 @@ public class Main {
 		indexer.index(INPUT_DOCS_PATH, null);
 		IndexReader reader = indexer.mWriter.getReader();
 		indexer.close();
-		mSearchString = "pas";
 	}
 
 	private static String getSearchString() throws IOException {
