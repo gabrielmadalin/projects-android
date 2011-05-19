@@ -16,28 +16,26 @@ import org.apache.lucene.util.Version;
 
 public class RoAnalyzer extends Analyzer
 {
-	private final Version version;
-	private Set<?> stopWords;
+	private final Version mVersion;
+	private Set<?> mStopWords;
 	
-	/** Builds the named analyzer with no stop words. */
 	public RoAnalyzer(Version version) {
-		this.version = version;
+		this.mVersion = version;
 	}
 	
-	/** Builds the named analyzer with the given stop words. */
 	public RoAnalyzer(Version version, String[] stopwords) {
 	    this(version);
-	    stopWords = StopFilter.makeStopSet(stopwords);
+	    mStopWords = StopFilter.makeStopSet(stopwords);
 	}
 	
 	@Override
 	public TokenStream tokenStream(String fieldName, Reader reader) {
-	    TokenStream result = new StandardTokenizer(version, reader);
+	    TokenStream result = new StandardTokenizer(mVersion, reader);
 	    result = new StandardFilter(result);
 	    result = new LowerCaseFilter(result);
-	    if (stopWords != null)
-	    	result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(version),
-	                              result, stopWords);
+	    if (mStopWords != null)
+	    	result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(mVersion),
+	                              result, mStopWords);
 	    result = new RoFilter(result);
 	    return result;
 	}
@@ -47,29 +45,21 @@ public class RoAnalyzer extends Analyzer
 		TokenStream result;
 	};
 
-
-	/** Returns a (possibly reused) {@link StandardTokenizer} filtered by a 
-	   * {@link StandardFilter}, a {@link LowerCaseFilter}, 
-	   * a {@link StopFilter}, and a {@link SnowballFilter} */
-
 	@Override
 	public TokenStream reusableTokenStream(String fieldName, Reader reader)
 	throws IOException {
 		if (overridesTokenStreamMethod) {
-			// LUCENE-1678: force fallback to tokenStream() if we
-			// have been subclassed and that subclass overrides
-			// tokenStream but not reusableTokenStream
 			return tokenStream(fieldName, reader);
 	    }
 	    SavedStreams streams = (SavedStreams) getPreviousTokenStream();
 	    if (streams == null) {
 	    	streams = new SavedStreams();
-	    	streams.source = new StandardTokenizer(version, reader);
+	    	streams.source = new StandardTokenizer(mVersion, reader);
 	    	streams.result = new StandardFilter(streams.source);
 	    	streams.result = new LowerCaseFilter(streams.result);
-	    	if (stopWords != null)
-	    		streams.result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(version),
-	                                        streams.result, stopWords);
+	    	if (mStopWords != null)
+	    		streams.result = new StopFilter(StopFilter.getEnablePositionIncrementsVersionDefault(mVersion),
+	                                        streams.result, mStopWords);
 	    	streams.result = new RoFilter(streams.result);
 	    	setPreviousTokenStream(streams);
 	    } else {

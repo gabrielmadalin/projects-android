@@ -9,13 +9,13 @@ import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 
 public final class RoFilter extends TokenFilter{
 	  
-	private MyProgram stemmer;
-	private TermAttribute termAtt;
+	private MyProgram mStemmer;
+	private TermAttribute mTermAttribute;
 	public RoFilter(TokenStream input, MyProgram stemmer) 
 	{
 	    super(input);
-	    this.stemmer = stemmer;
-	    termAtt = (TermAttribute) addAttribute(TermAttribute.class);
+	    this.mStemmer = stemmer;
+	    mTermAttribute = (TermAttribute) addAttribute(TermAttribute.class);
 	 }
 	
 	 public RoFilter(TokenStream input) 
@@ -24,13 +24,13 @@ public final class RoFilter extends TokenFilter{
 	    try 
 	    {      
 	      RoStemmer stemClass = new RoStemmer();
-	      stemmer = (MyProgram) stemClass;
+	      mStemmer = (MyProgram) stemClass;
 	    } 
 	    catch (Exception e) 
 	    {
 	      throw new RuntimeException(e.toString());
 	    }
-	    termAtt = (TermAttribute) addAttribute(TermAttribute.class);
+	    mTermAttribute = (TermAttribute) addAttribute(TermAttribute.class);
 	  }
 
 	  /** Returns the next input Token, after being stemmed */
@@ -39,13 +39,12 @@ public final class RoFilter extends TokenFilter{
 	  {
 	    if (input.incrementToken()) 
 	    {
-	      String originalTerm = termAtt.term();
-	      stemmer.setCurrent(originalTerm);
-	      stemmer.stem();
-	      String finalTerm = stemmer.getCurrent();
-	      // Don't bother updating, if it is unchanged.
+	      String originalTerm = mTermAttribute.term();
+	      mStemmer.setCurrent(originalTerm);
+	      mStemmer.stem();
+	      String finalTerm = mStemmer.getCurrent();
 	      if (!originalTerm.equals(finalTerm))
-	        termAtt.setTermBuffer(finalTerm);
+	        mTermAttribute.setTermBuffer(finalTerm);
 	      return true;
 	    } 
 	    else 

@@ -54,26 +54,19 @@ public class Indexer {
   
 	public Indexer(String indexDir) throws IOException {
 		Directory dir = FSDirectory.open(new File(indexDir));
-		mWriter = new IndexWriter(dir,            //3 se creaza indexwriterul
-				
-			  //  new SnowballAnalyzer(Version.LUCENE_29,"Romanian",getStopWords()),
-			  new RoAnalyzer(Version.LUCENE_29, getStopWords()),
-			  true,                       //3
-			  IndexWriter.MaxFieldLength.UNLIMITED); //3
-
+		mWriter = new IndexWriter(dir,
+				new RoAnalyzer(Version.LUCENE_29, getStopWords()),
+				true, IndexWriter.MaxFieldLength.UNLIMITED);
 	}
 
 
-	public void close() throws IOException 
-	{
-		mWriter.close();                             //4
+	public void close() throws IOException 	{
+		mWriter.close();                   
 	}
-
 
 	public int index(String dataDir, FileFilter filter) throws Exception {
 		File[] files = new File(dataDir).listFiles();
 		for (File f: files) {
-			
 			if (!f.isDirectory() &&
 					!f.isHidden() &&
 					f.exists() &&
@@ -82,51 +75,36 @@ public class Indexer {
 				indexFile(f);
 			}
 		}
-		return mWriter.numDocs();                     //5
+		return mWriter.numDocs();
 	}
+
 	public static class TextFilesFilter implements FileFilter {
 		public boolean accept(File path) {
-			return path.getName().toLowerCase()        //6
-             .endsWith(".txt");                  //6
+			return
+			path.getName().toLowerCase().endsWith(".txt") || 
+			path.getName().toLowerCase().endsWith(".pdf") ||
+			path.getName().toLowerCase().endsWith(".doc");
 		}
 	}
+
 	protected Document getDocument(File f) throws Exception {
 		Document doc = new Document();
-//		FileReader fileReader = new FileReader(f);
-//		doc.add(new Field(Main.CONTENT, fileReader));
 		doc.add(new Field(Main.CONTENT, Util.getContent(f.getAbsolutePath()), Field.Store.YES, Field.Index.ANALYZED));
-		doc.add(new Field(Main.TITLE, f.getName(),       				//8
-				Field.Store.YES, Field.Index.NOT_ANALYZED));			//8
-		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   		//9
-    		Field.Store.YES, Field.Index.NOT_ANALYZED));				//9
+		doc.add(new Field(Main.TITLE, f.getName(),
+				Field.Store.YES, Field.Index.NOT_ANALYZED));
+		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),
+    		Field.Store.YES, Field.Index.NOT_ANALYZED));
 		doc.add(new Field(Main.FIRST_LINE, Util.getFirstLine(f.getAbsolutePath()),
 				Field.Store.YES, Field.Index.NOT_ANALYZED));
 		doc.add(new Field(Main.DATE, Util.getData(f.lastModified()),
 				Field.Store.YES, Field.Index.NOT_ANALYZED));
 		f.lastModified();
-//		String content = Util.getContent(f.getAbsolutePath());
-//		String content = Util.getFirstLine(f.getAbsolutePath());
-//		Util.log(content);
-//		doc.add(new Field(Main.CONTENT, content, Field.Store.NO, Field.Index.ANALYZED));
 		return doc;
 	}
 	private void indexFile(File f) throws Exception {
-		System.out.println("Indexing " + f.getCanonicalPath());
+		Util.log("Indexing " + f.getCanonicalPath());
 		Document doc = getDocument(f);
 		Analyzer analyzer = new RoAnalyzer(Version.LUCENE_29,getStopWords());
-		mWriter.addDocument(doc, analyzer);                           //10
+		mWriter.addDocument(doc, analyzer);
 	}
 }
-
-/*
-#1 Create index in this directory
-#2 Index *.txt files from this directory
-#3 Create Lucene IndexWriter
-#4 Close IndexWriter
-#5 Return number of documents indexed
-#6 Index .txt files only, using FileFilter
-#7 Index file content
-#8 Index file name
-#9 Index file full path
-#10 Add document to Lucene index
-*/
