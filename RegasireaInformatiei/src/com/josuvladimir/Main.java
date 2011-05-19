@@ -28,24 +28,34 @@ public class Main {
 	public static final String CONTENT 				= "contents";
 	public static final String FILENAME 			= "filename";
 	public static final String FULLPATH 			= "fullpath";
+	public static final String FIRST_LINE 			= "first_line";
 	public static final String TITLE 				= "title";
 	private static String mSearchString;
+	private static Scanner mScanner;
 //	private static File mOutputFile;
 //	private static FileWriter mWriter;
 
 	public static void main(String[] args) {
 		try {
 			init();
-			index();
 			long time = System.currentTimeMillis();
+			index();
 			Util.log("Index in " + String.valueOf(System.currentTimeMillis() - time) + " milis");
-			search();
+			while (getSearchString().length() > 0) {
+				search();
+			}
+			mScanner.close();
+			Util.log("Exit");
 		} catch (IOException e) {
 			Util.log("Error:" + e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void init() {
+		mScanner = new Scanner(System.in);
 	}
 
 	@SuppressWarnings("unused")
@@ -56,12 +66,13 @@ public class Main {
 		indexer.close();
 		mSearchString = "pas";
 	}
-
-	private static void init() throws IOException {
-		Scanner scanner = new Scanner(System.in);
+//popescunmarius@gmail.com
+	private static String getSearchString() throws IOException {
 		Util.log("Search for: ");
-		mSearchString = scanner.nextLine();
-		scanner.close();
+		if (mScanner.hasNextLine()) {
+			mSearchString = mScanner.nextLine();
+		}
+		return mSearchString;
 //		File file = new File(INPUT_FILE_PATH);
 //		FileInputStream inputStream;
 //		inputStream = new FileInputStream(file);
@@ -81,6 +92,8 @@ public class Main {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
 				Util.log("Found in: " + document.get(FULLPATH));
+//				List fields = document.getFields();
+//				Util.log(fields.toString());
 			}
 		}
 	}
