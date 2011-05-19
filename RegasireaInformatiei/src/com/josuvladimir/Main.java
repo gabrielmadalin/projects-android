@@ -30,6 +30,7 @@ public class Main {
 	public static final String FULLPATH 			= "fullpath";
 	public static final String FIRST_LINE 			= "first_line";
 	public static final String TITLE 				= "title";
+	public static final String DATE 				= "date";
     public static String Language = "Romanian";
 	private static String mSearchString;
 	private static Scanner mScanner;
@@ -92,7 +93,7 @@ public class Main {
 		if (hits.length() > 0) {
 			for (int i = 0; i < hits.length(); i++) {
 				Document document = hits.doc(i);
-				Util.log("Found in: " + document.get(FULLPATH));
+				Util.log("Found in: " + document.get(FULLPATH) + "\nDate: " + document.get(DATE)  + "\nScore: " + hits.score(i) + "\n " + document.get(FIRST_LINE));
 //				List fields = document.getFields();
 //				Util.log(fields.toString());
 			}

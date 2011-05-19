@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Util {
 //	private static final String DIACRITICS = "";
@@ -74,5 +76,13 @@ public class Util {
 		 "�" => "I", "�" => "i", "�" => "a", "�" => "A", "�" => "s", "a" => "a"
 		 */		
 		return contentString;
+	}
+	public static String getData(long lastModified) {
+		String dateString;
+		long l = Long.decode(String.valueOf(lastModified));
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTimeInMillis(l);
+		dateString = "" + calendar.get(GregorianCalendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" +calendar.get(Calendar.YEAR); 
+		return dateString;
 	}
 }
