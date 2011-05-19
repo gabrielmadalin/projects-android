@@ -99,11 +99,11 @@ public class Indexer {
 				Field.Store.YES, Field.Index.NOT_ANALYZED));			//8
 		doc.add(new Field(Main.FULLPATH, f.getCanonicalPath(),   		//9
     		Field.Store.YES, Field.Index.NOT_ANALYZED));				//9
-		doc.add(new Field(Main.FIRST_LINE, Util.getFirstLine(f.getAbsolutePath()),
-				Field.Store.YES, Field.Index.NOT_ANALYZED));
-//		String content = Util.getContent(f.getAbsolutePath());
+//		doc.add(new Field(Main.FIRST_LINE, Util.getFirstLine(f.getAbsolutePath()),
+//				Field.Store.YES, Field.Index.NOT_ANALYZED));
+		String content = Util.getContent(f.getAbsolutePath());
 //		String content = Util.getFirstLine(f.getAbsolutePath());
-//		Util.log(content);
+		Util.log(content);
 //		doc.add(new Field(Main.CONTENT, content, Field.Store.NO, Field.Index.ANALYZED));
 		return doc;
 	}
