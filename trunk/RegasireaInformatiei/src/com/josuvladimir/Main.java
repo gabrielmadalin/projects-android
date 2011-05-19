@@ -30,6 +30,7 @@ public class Main {
 	public static final String FULLPATH 			= "fullpath";
 	public static final String FIRST_LINE 			= "first_line";
 	public static final String TITLE 				= "title";
+    public static String Language = "Romanian";
 	private static String mSearchString;
 	private static Scanner mScanner;
 //	private static File mOutputFile;

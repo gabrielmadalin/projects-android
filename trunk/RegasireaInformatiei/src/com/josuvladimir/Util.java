@@ -24,7 +24,6 @@ public class Util {
 //		Util.log(contentString);
 		fileInputStream.close();
 		contentString = replaceDiacritics(contentString);
-		getFirstLine(contentString);
 		return contentString;
 	}
 	public static String getFirstLine(String filePath) throws IOException {
@@ -39,14 +38,21 @@ public class Util {
 	}
 	
 	public static String replaceDiacritics(String contentString) {
-		
 		//*/
 		contentString = contentString
-		.replace("\u0103", "a")
-		.replace("\u00e2", "a")
-		.replace("\u00ee", "i")
-		.replace("\u015f", "s")
-		.replace("\u0163", "t");
+		.replace("ƒÇ", "A")
+		.replace("ƒÉ", "a")
+		.replace("√Ç", "A")
+		.replace("√¢", "a")
+		.replace("√é", "I")
+		.replace("√Æ", "i")
+		.replace("»ö", "T")
+		.replace("≈£", "t")
+		.replace("»ö", "T")
+		.replace("»õ", "t")
+		.replace("≈û", "S")
+		.replace("»ò", "S")
+		.replace("≈ü", "s");
 		/*/
 		contentString.replace("&#226;", "a");
 		contentString.replace("&#238;", "i");
