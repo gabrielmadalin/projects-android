@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 
 
 
-public abstract class MyProgram {
-	protected MyProgram()
+public abstract class Stemmer {
+	protected Stemmer()
     {
 	current = new StringBuilder();
 	setCurrent("");
@@ -44,7 +44,7 @@ public abstract class MyProgram {
     protected int bra;
     protected int ket;
 
-    protected void copy_from(MyProgram other)
+    protected void copy_from(Stemmer other)
     {
 	current          = other.current;
 	cursor           = other.cursor;

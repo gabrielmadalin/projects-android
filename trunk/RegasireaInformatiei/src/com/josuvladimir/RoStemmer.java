@@ -2,7 +2,7 @@ package com.josuvladimir;
 
 
 
-public class RoStemmer extends MyProgram{
+public class RoStemmer extends Stemmer{
 	private Among a_0[] = {
             new Among ( "", -1, 3, "", this),
             new Among ( "I", 0, 1, "", this),

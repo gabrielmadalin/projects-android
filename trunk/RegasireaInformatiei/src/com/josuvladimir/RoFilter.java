@@ -9,9 +9,9 @@ import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 
 public final class RoFilter extends TokenFilter{
 	  
-	private MyProgram mStemmer;
+	private Stemmer mStemmer;
 	private TermAttribute mTermAttribute;
-	public RoFilter(TokenStream input, MyProgram stemmer) 
+	public RoFilter(TokenStream input, Stemmer stemmer) 
 	{
 	    super(input);
 	    this.mStemmer = stemmer;
@@ -24,7 +24,7 @@ public final class RoFilter extends TokenFilter{
 	    try 
 	    {      
 	      RoStemmer stemClass = new RoStemmer();
-	      mStemmer = (MyProgram) stemClass;
+	      mStemmer = (Stemmer) stemClass;
 	    } 
 	    catch (Exception e) 
 	    {

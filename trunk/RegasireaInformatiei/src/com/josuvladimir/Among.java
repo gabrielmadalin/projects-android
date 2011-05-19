@@ -10,9 +10,9 @@ public class Among {
 	public int subStringIndex;
 	public int mResult;
 	public Method mMethod;
-	public MyProgram mOject;
+	public Stemmer mOject;
 
-	public Among (String string, int subString_idx, int result,	String methodname, MyProgram methodobject) {
+	public Among (String string, int subString_idx, int result,	String methodname, Stemmer methodobject) {
 		mStringSize = string.length();
 		mSearchString = string;
 		subStringIndex = subString_idx;
