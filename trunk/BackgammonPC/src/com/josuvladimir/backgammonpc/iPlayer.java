@@ -325,7 +325,7 @@ public class iPlayer extends Player {
     public int getPointCost(int pointIdx, int pointSize, Piece.colorType c)
     {
         @SuppressWarnings("unused")
-		int hight = 30,low = 1,pointCost, currentRisc;
+		int hight = 30, medium = 10, low = 1,pointCost, currentRisc;
         currentRisc = low;
         //*
         if(pointSize == 1 && pointIdx != 25)
@@ -353,7 +353,7 @@ public class iPlayer extends Player {
         }
 
         pointCost = pointIdx * pointSize;
-        /*
+        //*
         if(pointIdx < 7)
         {
             if(pointSize == 1)
@@ -380,8 +380,8 @@ public class iPlayer extends Player {
         }
         else
             pointCost = medium * pointIdx;
-         *
-         */
+         
+         //*/
         return pointCost;
     }
 
