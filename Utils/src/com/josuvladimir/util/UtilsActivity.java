@@ -1,6 +1,7 @@
 package com.josuvladimir.util;
 
 import com.josuvladimir.util.EditTextValidator.Type;
+import com.josuvladimir.util.ShakeEventListener.OnShakeListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
-public class UtilsActivity extends Activity implements OnClickListener {
+public class UtilsActivity extends Activity implements OnClickListener, OnShakeListener {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,19 +18,28 @@ public class UtilsActivity extends Activity implements OnClickListener {
         setContentView(R.layout.main);
         findViewById(R.id.main_btn_carousel).setOnClickListener(this);
         new EditTextValidator((EditText) findViewById(R.id.main_edit_text), Type.MAIL);
-        findViewById(R.id.main_edit_text);
+        new ShakeEventListener(this,this);
     }
 
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.main_btn_carousel:
-			Intent intent = new Intent(this, CarouselActivity.class);
-			startActivity(intent);
+			loadCarousel();
 			break;
 
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void onShake() {
+		loadCarousel();
+	}
+
+	private void loadCarousel() {
+		Intent intent = new Intent(this, CarouselActivity.class);
+		startActivity(intent);
 	}
 }
