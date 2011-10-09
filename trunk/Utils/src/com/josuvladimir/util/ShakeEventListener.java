@@ -18,11 +18,15 @@ public class ShakeEventListener implements SensorEventListener{
 	private float lastX = 0;
 	private float lastY = 0;
 	private float lastZ = 0;
+	private SensorManager mSensorManager;
 	
 	public ShakeEventListener(Context context, OnShakeListener listener) {
-		SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-		sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+		mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
 		setOnShakeListener(listener);
+	}
+	public void unregister() {
+		mSensorManager.unregisterListener(this);
 	}
 	
 	private OnShakeListener mShakeListener;
