@@ -1,7 +1,5 @@
 package com.josuvladimir.directions;
 
-import com.josuvladimir.util.Util;
-
 import android.location.Location;
 
 public class Station {
@@ -12,7 +10,7 @@ public class Station {
 	}
 	public static Station getRandomStation() {
 		Station station = new Station();
-		station.setName(Util.getRandomString(7));
+		station.setName("StationName");
 		return station;
 	}
 	public void setName(String mName) {
