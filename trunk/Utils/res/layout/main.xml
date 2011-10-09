@@ -10,4 +10,7 @@
     android:text="@string/hello"
     />
 <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/main_btn_carousel" android:text="@string/carousel"></Button>
+<EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textEmailAddress" android:id="@+id/main_edit_text">
+    <requestFocus></requestFocus>
+</EditText>
 </LinearLayout>
