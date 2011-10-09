@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, UtilsActivity!</string>
     <string name="app_name">Utils</string>
+    <string name="carousel">Carousel</string>
 </resources>
