@@ -152,9 +152,8 @@ public class CarouselActivity extends Activity {
               imageView.setLayoutParams(new Carousel.LayoutParams(120, 180));
               imageView.setScaleType(ScaleType.MATRIX);
               mImages[index++] = imageView;
-              
-              }
-           return true;
+    	  }
+    	  return true;
       }
  }
 }
