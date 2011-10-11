@@ -20,7 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-import com.josuvladimir.util.Carousel;
+import com.josuvladimir.util.Coverflow;
 
 public class CarouselActivity extends Activity {
     
@@ -30,12 +30,12 @@ public class CarouselActivity extends Activity {
     
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Carousel carousel;
-		carousel = new Carousel(this);
+		Coverflow carousel;
+		carousel = new Coverflow(this);
 		ImageAdapter coverImageAdapter =  new ImageAdapter(this);
 		coverImageAdapter.createReflectedImages();
 		carousel.setAdapter(coverImageAdapter);
-		carousel.setSpacing(0);
+		carousel.setSpacing(50);
 		carousel.setSelection(4, true);
 		carousel.setAnimationDuration(1000);
 		setContentView(carousel);
@@ -82,7 +82,7 @@ public class CarouselActivity extends Activity {
 	  //Use this code if you want to load from resources
 	     ImageView i = new ImageView(mContext);
 	     i.setImageResource(mImageIds[getPosition(position)]);
-	     i.setLayoutParams(new Carousel.LayoutParams(130, 130));
+	     i.setLayoutParams(new Coverflow.LayoutParams(130, 130));
 	     i.setScaleType(ImageView.ScaleType.CENTER_INSIDE); 
 	     
 	     //Make sure we set anti-aliasing otherwise we get jaggies
@@ -149,7 +149,7 @@ public class CarouselActivity extends Activity {
               
               ImageView imageView = new ImageView(mContext);
               imageView.setImageBitmap(bitmapWithReflection);
-              imageView.setLayoutParams(new Carousel.LayoutParams(120, 180));
+              imageView.setLayoutParams(new Coverflow.LayoutParams(120, 180));
               imageView.setScaleType(ScaleType.MATRIX);
               mImages[index++] = imageView;
     	  }

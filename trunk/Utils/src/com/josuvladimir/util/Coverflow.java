@@ -9,7 +9,7 @@ import android.view.animation.Transformation;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
-public class Carousel extends Gallery {
+public class Coverflow extends Gallery {
 	/**
      * Get the Centre of the View
      * @return The centre of the given view.
@@ -26,12 +26,12 @@ public class Carousel extends Gallery {
     /**
      * The maximum angle the Child ImageView will be rotated by
      */    
-    private int mMaxRotationAngle = 70;
+    private int mMaxRotationAngle = 60;
     
     /**
      * The maximum zoom on the centre Child
      */
-    private int mMaxZoom = -100;
+    private int mMaxZoom = -200;
  
     /**
      * The Centre of the Coverflow 
@@ -39,17 +39,17 @@ public class Carousel extends Gallery {
     private int mCarouselCenter;
 
  
-    public Carousel(Context context) {
+    public Coverflow(Context context) {
     	super(context);
     	this.setStaticTransformationsEnabled(true);
     }
 
-    public Carousel(Context context, AttributeSet attrs) {
+    public Coverflow(Context context, AttributeSet attrs) {
     	super(context, attrs);
     	this.setStaticTransformationsEnabled(true);
     }
   
-    public Carousel(Context context, AttributeSet attrs, int defStyle) {
+    public Coverflow(Context context, AttributeSet attrs, int defStyle) {
     	super(context, attrs, defStyle);
     	this.setStaticTransformationsEnabled(true);   
     }
