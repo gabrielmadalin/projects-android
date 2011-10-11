@@ -51,7 +51,7 @@ public class UtilsActivity extends Activity implements OnClickListener, OnShakeL
 	@Override
 	public void onShake() {
 		if (!mPlayer.isPlaying()) {
-			mPlayer.start();
+//			mPlayer.start();
 		}
 		loadCarousel();
 	}
