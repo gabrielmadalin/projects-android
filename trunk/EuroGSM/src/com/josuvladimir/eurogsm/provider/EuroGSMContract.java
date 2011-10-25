@@ -25,7 +25,8 @@ public class EuroGSMContract {
 	}
 	
 	public static class Shop implements ShopColumns, BaseColumns {
-		private static final String PATH_SHOP = "shop";
+		public static final String TABLE_NAME = "shop";
+		private static final String PATH_SHOP = TABLE_NAME;
 		public static final Uri CONTENT_URI = 
 				BASE_CONTENT_URI.buildUpon().appendPath(PATH_SHOP).build();
 		public static final String CONTENT_TYPE = 
