@@ -23,15 +23,18 @@ import org.json.JSONObject;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 
@@ -265,5 +268,10 @@ public class Util {
 			string += mRandom.nextInt(CHAR);
 		}
 		return string;
+	}
+	public static void sendSMS(Context context, String destinationAddress, String textMessage, String intentAction) {
+        SmsManager smsManager = SmsManager.getDefault();
+		smsManager.sendTextMessage(destinationAddress, null, textMessage, PendingIntent.getBroadcast(context, 0, new Intent(intentAction), 0), null);
+		Toast.makeText(context, "Sended", Toast.LENGTH_SHORT).show();
 	}
 }
