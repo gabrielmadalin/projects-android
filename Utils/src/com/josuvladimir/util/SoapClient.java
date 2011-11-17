@@ -1,6 +1,8 @@
 package com.josuvladimir.util;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -9,55 +11,132 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.Bundle;
-
+ 
 public class SoapClient {
+	
+	public SoapClient(String soapAction, String methodName, String namespace, String uri, Boolean dotNet){
+		setSoapAction(soapAction);
+		setMethodName(methodName);
+		setNamespace(namespace);
+		setUri(uri);
+		setDotNet(dotNet);
+	}
+	
+	private String mSoapAction; 		//action name on webservice
+	private String mMethodName; 		//method name to call
+	private String mNamespace; 		//mNamespace
+	private String mUri;				//path(wsdl, asmx..)	
+	private Boolean mDotNet;			//is .NET?
+	private Map<String,Object> parameters;	
+	
+	public String getSoapAction() {
+		return mSoapAction;
+	}
 
-	private static SoapClient mInstance;
-	private String mNameSpace, mSoapAction, mUrl;
-	private boolean mDebug = false;
-	
-	public static synchronized SoapClient getInstance() {
-		 
-			if (mInstance == null) {
-				mInstance = new SoapClient();
-			
-		}
-		return mInstance;
+	public void setSoapAction(String soapAction) {
+		this.mSoapAction = soapAction;
+	}
+
+	public String getMethodName() {
+		return mMethodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.mMethodName = methodName;
+	}
+
+	public String getNamespace() {
+		return mNamespace;
+	}
+
+	public void setNamespace(String namespace) {
+		this.mNamespace = namespace;
+	}
+
+	public String getUri() {
+		return mUri;
+	}
+
+	public void setUri(String uri) {
+		this.mUri = uri;
 	}
 	
-	public void setNameSpace(String mNameSpace) {
-		this.mNameSpace = mNameSpace;
+	public Map<String, Object> getParameters() {
+		return parameters;
 	}
-	public void setUrl(String mUrl) {
-		this.mUrl = mUrl;
+
+	public void setParameters(Map<String, Object> parameters) {
+		this.parameters = parameters;
 	}
-	public void setSoapAction(String mSoapAction) {
-		this.mSoapAction = mSoapAction;
+
+	public Boolean getDotNet() {
+		return mDotNet;
 	}
-	
-	public SoapObject request(String methodName, Bundle params) throws IOException, XmlPullParserException {
-		SoapObject request = new SoapObject(mNameSpace, methodName); //set up request
+
+	public void setDotNet(Boolean dotNet) {
+		this.mDotNet = dotNet;
+	}
+	public Object executeCallResponce(String method, Bundle params) throws IOException, XmlPullParserException {
+		SoapObject soapObject = new SoapObject(mNamespace, method);
 		Iterable<String> keySet = params.keySet();
-		for (String string : keySet) {
-			request.addProperty(string, params.getString(string));
+		for (String key : keySet) {
+			soapObject.addProperty(key, params.get(key));
 		}
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); //put all required data into a soap envelope
-		envelope.setOutputSoapObject(request);  //prepare request
-		HttpTransportSE httpTransport = new HttpTransportSE(mUrl);
-		httpTransport.debug = isDebug();
-//		httpTransport.debug = LocationTrackerApplication.getInstance().isDebugable();  //this is optional, use it if you don't want to use a packet sniffer to check what the sent 
-		httpTransport.call(mSoapAction, envelope); //send request
-		SoapObject result=(SoapObject)envelope.getResponse(); //get response
-		return result;
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.dotNet = getDotNet();
+		HttpTransportSE httpTransportSE = new HttpTransportSE(getUri());
+		httpTransportSE.call(mSoapAction, envelope);
+		Object response = envelope.getResponse();
+		return response;
+	}
+
+	public void addParameter(String parameterName, Object parameterValue){
+		if(getParameters() == null){
+			this.parameters = new HashMap<String, Object>();
+		}		
+		getParameters().put(parameterName, parameterValue);
+	}
+	
+	public Object executeCallResponse() throws Exception{
+		Object result = null;
+		SoapObject request = new SoapObject(getNamespace(), getMethodName()); //create the soap method	            
 		
+		if(getParameters() != null){
+			for (Map.Entry<String, Object> property : getParameters().entrySet()) {  
+				String parameter = property.getKey();  
+		        Object value = property.getValue();	            	
+		        request.addProperty(parameter, value);	            	
+			}	                                
+			getParameters().clear();
+		}
+			            
+	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); //serialize the envelope 
+	    envelope.dotNet= getDotNet();
+	    envelope.setOutputSoapObject(request); //this method will return a response
+	    HttpTransportSE androidHttpTransport = new HttpTransportSE(getUri()); //open the requisition
+	    androidHttpTransport.call(getSoapAction(), envelope);// call
+	    result = envelope.getResponse(); // returns result of method called	           
+		
+		return result;
 	}
+	
+	public void executeCall() throws Exception{
+		SoapObject request = new SoapObject(getNamespace(), getMethodName()); //create the soap method	            
+		
+		if(getParameters() != null){
+			for (Map.Entry<String, Object> property : getParameters().entrySet()) {  
+				String parameter = property.getKey();  
+		        Object value = property.getValue();	            	
+		        request.addProperty(parameter, value);	            	
+			}	                                
+			getParameters().clear();
+		}
+			            
+	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); //serialize the envelope 
+	    envelope.dotNet= getDotNet();
+	    HttpTransportSE androidHttpTransport = new HttpTransportSE(getUri()); //open the requisition
+	    androidHttpTransport.call(getSoapAction(), envelope);// call
 
-	public boolean isDebug() {
-		return mDebug;
 	}
-
-	public void setDebug(boolean mDebug) {
-		this.mDebug = mDebug;
-	}
-
+	
 }
