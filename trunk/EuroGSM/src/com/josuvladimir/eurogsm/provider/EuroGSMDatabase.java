@@ -24,17 +24,18 @@ public class EuroGSMDatabase extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	
-		db.execSQL("CREATE TABLE " + Shop.TABLE_NAME + " (" + 
-				Shop._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + 
-				Shop.NAME + " TEXT NOT NULL," +
-				Shop.ADDRESS + " TEXT," +
-				Shop.CITY + " TEXT," +
-				Shop.COUNTY + " TEXT NOT NULL," + 
-				Shop.PHONE + " TEXT," +
-				Shop.PROGRAMM + " TEXT," +
-				Shop.IMAGE_URL + " TEXT," +
-				Shop.EMAIL + " TEXT" +
-				")");
+		db.execSQL("CREATE TABLE " + Shop.TABLE_NAME + " ("
+				+ Shop._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ Shop.NAME + " TEXT NOT NULL," 
+				+ Shop.ADDRESS + " TEXT,"
+				+ Shop.CITY + " TEXT,"
+				+ Shop.COUNTY + " TEXT NOT NULL,"
+				+ Shop.PHONE + " TEXT," 
+				+ Shop.PROGRAMM + " TEXT," 
+				+ Shop.IMAGE_URL + " TEXT," 
+				+ Shop.EMAIL + " TEXT,"
+				+ "UNIQUE (" + Shop._ID + ") ON CONFLICT REPLACE"
+				+ ")");
 	}
 
 	@Override
