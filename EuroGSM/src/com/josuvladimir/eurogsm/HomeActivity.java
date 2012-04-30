@@ -1,6 +1,7 @@
 package com.josuvladimir.eurogsm;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 
 public class HomeActivity extends Activity {

@@ -6,11 +6,13 @@ import com.josuvladimir.eurogsm.provider.EuroGSMContract.Shop;
 import com.josuvladimir.eurogsm.provider.EuroGSMDatabase.Tables;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
@@ -34,8 +36,27 @@ public class EuroGSMProvider extends ContentProvider {
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
+		Log.v(TAG, "delete(uri=" + uri + ")");
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		buildSimpleSelection(uri);
+		getContext().getContentResolver().notifyChange(uri, null);
 		return 0;
+	}
+
+	private void buildSimpleSelection(Uri uri) {
+//		builder = new SelectionBuilder();
+		int match = MATCHER.match(uri);
+		switch (match) {
+		case SHOP:
+//			return builder.table(Tables.SHOP);
+			break;
+		case SHOP_ID:
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -70,12 +91,22 @@ public class EuroGSMProvider extends ContentProvider {
 		Log.v(TAG, "query(uri=" + uri + ", proj=" + Arrays.toString(projection) + ")");
 		@SuppressWarnings("unused")
 		final SQLiteDatabase database = mOpenHelper.getReadableDatabase();
+		SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
 		int match = MATCHER.match(uri);
 		switch (match) {
 		case SHOP:
+			builder.setTables(Shop.TABLE_NAME);
+			break;
+		case SHOP_ID:
+			long id = ContentUris.parseId(uri);
+			selectionArgs = insertSelectionArg(selectionArgs, String.valueOf(id));
+			builder.appendWhere(Shop._ID + "=?");
+			builder.setTables(Shop.TABLE_NAME);
+			break;
 		default:
 			break;
 		}
+		
 		return null;
 	}
 
@@ -85,5 +116,15 @@ public class EuroGSMProvider extends ContentProvider {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	private String[] insertSelectionArg(String[] selectionArgs, String arg){
+		if(selectionArgs == null){
+			return new String[]{arg};
+		} else {
+			int newLength = selectionArgs.length + 1;
+			String[] newSelectionArgs = new String[newLength];
+			newSelectionArgs[0] = arg;
+			System.arraycopy(selectionArgs, 0, newSelectionArgs, 1, selectionArgs.length);
+			return newSelectionArgs;
+		}
+	}
 }
